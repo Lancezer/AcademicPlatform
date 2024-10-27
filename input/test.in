@@ -1,0 +1,64 @@
+login 23373475 asdf1234_
+logout
+logout 23373475 asdf1234_
+logout 23373475
+register
+register       2337333333333333  $adf   123   123   ad
+register 23373475 $adf 123 123 ad
+register 23373475 _adf 123 123 ad
+register 23373475 asdf_asf12 123 123 ad
+register 23373475 asdf_asf 123 123 ad
+register 23373475 asdf_asf asdf1234 asdf1234 ad
+register 23373475 asdf_asf asdf1234_ asdf1234 ad
+register 23373475 asdf_asf asdf1234_ asdf1234_ ad
+register 23373475 asdf_asf asdf1234_ asdf1234_ Teacher
+register 23373475 asdf_asf asdf1234_ asdf1234_ Student
+register BY2237300 Mu_Jue 123Aa@ 123Aa@ Student
+loogin
+login 23373475 asdf_asf asdf1234_ asdf1234_ Teacher
+login 2337 $adf
+login 23373475 asdf1234
+login 23373475 asdf_asf
+login 23373475 asdf1234_
+login 23373475 asdf1234_
+print 23373475
+printInfo 23373475
+printInfo
+register AD000 qwer_ qwer5678$ qwer5678$ Administrator
+register AD001 qwer_ qwer5678$ qwer5678$ Administrator
+logout 23373475
+logout
+printInfo
+login AD000 qwer5678$
+login AD001 qwer5678$
+printInfo 23373475
+printInfo AD000
+printInfo AD001
+logout AD001
+register 00001 zxcv zxcv1234@ zxcv1234@ Teacher
+register 00002 ghjk ghjk1234@ ghjk1234@ Teacher
+login 00001 zxcv1234@
+printInfo 00001
+createCourse as 1_1-2 1.0 3
+createCourse ad 1_3-4 1.0 5
+createCourse af 1_5-5 2.5 10
+createCourse ag 1_6-7 3.5 10
+createCourse ah 1_8-10 5.5 15
+createCourse ai 1_11-12 6.5 20
+createCourse aj 1_13-14 7.5 20
+createCourse ak 2_1-2 8.5 20
+createCourse al 2_3-4 9.5 20
+createCourse am 2_5-5 10.5 20
+listCourse
+logout
+login 00002 ghjk1234@
+createCourse an 2_6-7 11.5 20
+createCourse ao 2_8-10 12.5 20
+createCourse ap 2_11-12 12.5 20
+createCourse aq 2_13-14 13.5 20
+login 23373475 asdf1234_
+listCourse
+qiut
+quit asdfasfadsf fdfa
+qtui
+quit

@@ -1,0 +1,82 @@
+Register success
+Register success
+Register success
+Register success
+Welcome to ACP, 00001
+Welcome to ACP, 00002
+Welcome to ACP, 00003
+Welcome to ACP, AD001
+Permission denied
+Permission denied
+Permission denied
+Course does not exist
+Switch to 00001
+Create course success (courseId: C-1)
+C-1 OO 1_3-4 2.5 45
+List course success
+Switch to 00002
+Create course success (courseId: C-2)
+C-2 CO 4_7-8 4.5 81
+List course success
+Switch to 00003
+Create course success (courseId: C-3)
+C-3 AL 3_1-2 3.0 54
+List course success
+Switch to AD001
+Tea_a C-1 OO 1_3-4 2.5 45
+Tea_b C-2 CO 4_7-8 4.5 81
+Tea_c C-3 AL 3_1-2 3.0 54
+List course success
+Switch to 00001
+Cancel course success (courseId: C-1)
+Switch to 00002
+Cancel course success (courseId: C-2)
+Switch to 00003
+Cancel course success (courseId: C-3)
+Switch to 00001
+Create course success (courseId: C-4)
+Create course success (courseId: C-5)
+Create course success (courseId: C-6)
+Output course batch success
+C-4 AA 1_1-2 2.0 36
+C-5 BB 3_3-4 2.0 36
+C-6 CC 5_5-6 2.0 36
+List course success
+Switch to 00002
+Create course success (courseId: C-7)
+Create course success (courseId: C-8)
+Create course success (courseId: C-9)
+Input course batch success
+C-7 AA 1_1-2 2.0 36
+C-8 BB 3_3-4 2.0 36
+C-9 CC 5_5-6 2.0 36
+List course success
+Switch to 00003
+Create course success (courseId: C-10)
+Create course success (courseId: C-11)
+Create course success (courseId: C-12)
+Input course batch success
+Course name already exists
+Course name already exists
+Course name already exists
+Input course batch success
+C-10 AA 1_1-2 2.0 36
+C-11 BB 3_3-4 2.0 36
+C-12 CC 5_5-6 2.0 36
+List course success
+Switch to AD001
+Tea_a C-4 AA 1_1-2 2.0 36
+Tea_a C-5 BB 3_3-4 2.0 36
+Tea_a C-6 CC 5_5-6 2.0 36
+Tea_b C-7 AA 1_1-2 2.0 36
+Tea_b C-8 BB 3_3-4 2.0 36
+Tea_b C-9 CC 5_5-6 2.0 36
+Tea_c C-10 AA 1_1-2 2.0 36
+Tea_c C-11 BB 3_3-4 2.0 36
+Tea_c C-12 CC 5_5-6 2.0 36
+List course success
+00001 Bye~
+00002 Bye~
+00003 Bye~
+AD001 Bye~
+----- Good Bye! -----

@@ -1,0 +1,57 @@
+Register success
+Register success
+Register success
+Register success
+Register success
+Welcome to ACP, 22373003
+Welcome to ACP, 22373002
+Welcome to ACP, 22373001
+Welcome to ACP, 00001
+Welcome to ACP, 00002
+Switch to 00001
+Create course success (courseId: C-1)
+Create course success (courseId: C-2)
+Switch to 00002
+Create course success (courseId: C-3)
+Create course success (courseId: C-4)
+Switch to 22373003
+Select course success (courseId: C-1)
+Select course success (courseId: C-2)
+Select course success (courseId: C-3)
+Select course success (courseId: C-4)
+Switch to 22373002
+Select course success (courseId: C-2)
+Select course success (courseId: C-4)
+Switch to 22373001
+Select course success (courseId: C-1)
+Select course success (courseId: C-3)
+Switch to 00001
+22373001: Haha
+22373003: Hchc
+List student success
+Switch to 00002
+22373002: Hbhb
+22373003: Hchc
+List student success
+Switch to 00001
+Remove student success
+Student does not select course
+Switch to 22373001
+1_3-4 OO 2.5 45 Tea_b
+List course schedule success
+Switch to 22373002
+3_3-4 CO 4.5 81 Tea_a
+3_5-6 CO 4.5 81 Tea_b
+List course schedule success
+Switch to 22373003
+1_1-2 OO 2.5 45 Tea_a
+1_3-4 OO 2.5 45 Tea_b
+3_3-4 CO 4.5 81 Tea_a
+3_5-6 CO 4.5 81 Tea_b
+List course schedule success
+22373003 Bye~
+22373002 Bye~
+22373001 Bye~
+00001 Bye~
+00002 Bye~
+----- Good Bye! -----
