@@ -27,10 +27,6 @@ public class Teacher extends User {
         return 10;
     }
 
-    public ArrayList<Course> getCourseList() {
-        return new ArrayList<>(courseList.values());
-    }
-
     public void addCourse(Course course) {
         courseList.put(course.getName(), course);
     }
@@ -39,15 +35,23 @@ public class Teacher extends User {
         return courseList.get(name);
     }
 
-    public Course removeCourse(Course course) {
+    public void removeCourse(Course course) {
         if (courseList.containsValue(course)) {
-            return courseList.remove(course.getName());
+            courseList.remove(course.getName());
         }
-        return course;
+    }
+
+    public boolean isCourseConflict(CourseTime courseTime) {
+        for (Course course : courseList.values()) {
+            if (course.getTime().isConflict(courseTime)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void printTeacherCourseList(PrintStream printStream, boolean isPrintName, boolean isPrintID) {
-        List<Course> sortedCourseList = this.getCourseList();
+        List<Course> sortedCourseList = new ArrayList<>(courseList.values());
         sortedCourseList.sort(new Comparator<Course>() {
             @Override
             public int compare(Course o1, Course o2) {
@@ -63,6 +67,25 @@ public class Teacher extends User {
             }
             printStream.println(course.getName() + " " + course.getTime().toString()
                     + " " + String.format("%.1f", course.getCredit()) + " " + course.getPeriod());
+        }
+    }
+
+    public boolean searchStudent(String studentID) {
+        for (Course course : courseList.values()) {
+            if (course.searchStudent(studentID) != null) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void removeStudent(String studentID) {
+        for (Course course : courseList.values()) {
+            Student student = course.searchStudent(studentID);
+            if (student != null) {
+                course.removeStudent(student);
+                student.removeCourse(course);
+            }
         }
     }
 }

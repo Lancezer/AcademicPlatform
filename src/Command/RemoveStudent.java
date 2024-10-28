@@ -22,13 +22,9 @@ public class RemoveStudent extends Command {
         User user = State.getCurOnlineUser();
         if (courseID.length == 0 && user.getIdentity() == User.Identity.TEACHER) {
             Teacher teacher = (Teacher) user;
-            ArrayList<Course> courseList = teacher.getCourseList();
-            for (Course course : courseList) {
-                if (course.searchStudent(studentID) != null) {
-                    return;
-                }
+            if (!teacher.searchStudent(studentID)) {
+                throw new IllegalArgumentException(ERR_MSG[31]);
             }
-            throw new IllegalArgumentException(ERR_MSG[31]);
         } else if (courseID.length == 1) {
             Course course = Database.searchCourse(courseID[0]);
             if (course.searchStudent(studentID) == null) {
@@ -46,7 +42,7 @@ public class RemoveStudent extends Command {
         studentIdentityCheck(args[0]);
         if (args.length == 2) {
             strCheck(args[1], ERR_MSG[24], ARG_FORMAT[9]);
-            courseExistCheck(args[1]);
+            courseExistCheck(args[1], 0);
         }
         if (args.length == 2) {
             studentCourseSelectCheck(args[0], args[1]);
@@ -65,19 +61,9 @@ public class RemoveStudent extends Command {
             User user = State.getCurOnlineUser();
             if (user.getIdentity() == User.Identity.TEACHER) {
                 Teacher teacher = (Teacher) user;
-                ArrayList<Course> courseList = teacher.getCourseList();
-                for (Course course : courseList) {
-                    if (course.searchStudent(args[0]) != null) {
-                        student.removeCourse(course);
-                        course.removeStudent(student);
-                    }
-                }
+                teacher.removeStudent(args[0]);
             } else {
-                ArrayList<Course> courseList = student.getCourseList();
-                for (Course course : courseList) {
-                    course.removeStudent(student);
-                }
-                student.getCourseList().clear();
+                student.clearCourse();
             }
         }
         System.out.println(SUCCESS_MEG[17]);

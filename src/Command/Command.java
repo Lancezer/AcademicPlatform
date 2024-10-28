@@ -5,7 +5,6 @@ import System.*;
 import User.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public abstract class Command {
     protected String[] args;
@@ -82,7 +81,7 @@ public abstract class Command {
         }
     }
 
-    public void courseExistCheck(String id) throws IllegalArgumentException {
+    public void courseExistCheck(String id, int mode) throws IllegalArgumentException {
         if (Database.searchCourse(id) == null) {
             throw new IllegalArgumentException(ERR_MSG[22]);
         }
@@ -92,6 +91,12 @@ public abstract class Command {
             Course course = Database.searchCourse(id);
             Course course1 = teacher.searchCourse(course.getName());
             if (course1 == null || course1.getID() != course.getID()) {
+                throw new IllegalArgumentException(ERR_MSG[22]);
+            }
+        } else if (mode == 1 && user.getIdentity() == User.Identity.STUDENT) {
+            Student student = (Student) user;
+            Course course = Database.searchCourse(id);
+            if (!student.hasCourse(course)) {
                 throw new IllegalArgumentException(ERR_MSG[22]);
             }
         }
@@ -110,11 +115,8 @@ public abstract class Command {
 
     public void courseConflictCheck(CourseTime courseTime) throws IllegalArgumentException {
         Teacher teacher = (Teacher) State.getCurOnlineUser();
-        ArrayList<Course> courseList = teacher.getCourseList();
-        for (Course course : courseList) {
-            if (course.getTime().isConflict(courseTime)) {
-                throw new IllegalArgumentException(ERR_MSG[19]);
-            }
+        if (teacher.isCourseConflict(courseTime)) {
+            throw new IllegalArgumentException(ERR_MSG[19]);
         }
     }
 

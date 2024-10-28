@@ -27,7 +27,7 @@ public class ListStudent extends Command {
         curOnlineUserCheck();
         permissionCheck(State.getCurOnlineUser(), ERR_MSG[11], User.Identity.TEACHER, User.Identity.ADMIN);
         strCheck(args[0], ERR_MSG[24], ARG_FORMAT[9]);
-        courseExistCheck(args[0]);
+        courseExistCheck(args[0], 0);
         studentNumCheck();
     }
 

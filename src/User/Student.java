@@ -1,6 +1,6 @@
 package User;
 
-import Course.Course;
+import Course.*;
 
 import java.util.ArrayList;
 
@@ -40,10 +40,6 @@ public class Student extends User {
         return type;
     }
 
-    public ArrayList<Course> getCourseList() {
-        return courseList;
-    }
-
     public int getCourseNum() {
         return courseList.size();
     }
@@ -52,12 +48,32 @@ public class Student extends User {
         courseList.add(course);
     }
 
-    public Course removeCourse(Course course) {
+    public void removeCourse(Course course) {
         int courseIndex = courseList.indexOf(course);
-        if (courseIndex == -1) {
-            return null;
+        if (courseIndex != -1) {
+            courseList.remove(courseIndex);
         }
-        return courseList.remove(courseIndex);
+
+    }
+
+    public boolean hasCourse(Course course) {
+        return courseList.contains(course);
+    }
+
+    public void clearCourse() {
+        for (Course course : courseList) {
+            course.removeStudent(this);
+        }
+        courseList.clear();
+    }
+
+    public boolean isCourseConflict(CourseTime courseTime) {
+        for (Course course : courseList) {
+            if (course.getTime().isConflict(courseTime)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public int compareTo(Student student) {

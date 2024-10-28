@@ -20,31 +20,11 @@ public class CancelCourse extends Command {
         }
     }
 
-    public void courseExistCheck(String id) throws IllegalArgumentException {
-        if (Database.searchCourse(id) == null) {
-            throw new IllegalArgumentException(ERR_MSG[22]);
-        }
-        User user = State.getCurOnlineUser();
-        if (user.getIdentity() == User.Identity.STUDENT) {
-            Student student = (Student) user;
-            Course course = Database.searchCourse(id);
-            if (!student.getCourseList().contains(course)) {
-                throw new IllegalArgumentException(ERR_MSG[22]);
-            }
-        } else if (user.getIdentity() == User.Identity.TEACHER) {
-            Teacher teacher = (Teacher) user;
-            Course course = Database.searchCourse(id);
-            if (teacher.searchCourse(course.getName()) == null) {
-                throw new IllegalArgumentException(ERR_MSG[22]);
-            }
-        }
-    }
-
     public void checkCommand() {
         argsNumCheck(args.length);
         curOnlineUserCheck();
         strCheck(args[0], ERR_MSG[24], ARG_FORMAT[9]); // 课程编号
-        courseExistCheck(args[0]); // 课程存在
+        courseExistCheck(args[0], 1); // 课程存在
     }
 
     public void execute() {

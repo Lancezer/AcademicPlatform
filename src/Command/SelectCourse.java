@@ -22,12 +22,10 @@ public class SelectCourse extends Command {
 
     public void courseTimeConflictCheck(String id) throws IllegalArgumentException {
         Student student = (Student) State.getCurOnlineUser();
-        ArrayList<Course> courseList = student.getCourseList();
         Course chosenCourse = Database.searchCourse(id);
-        for (Course course : courseList) {
-            if (course.getTime().isConflict(chosenCourse.getTime())) {
-                throw new IllegalArgumentException(ERR_MSG[19]);
-            }
+        if (student.isCourseConflict(chosenCourse.getTime())) {
+            throw new IllegalArgumentException(ERR_MSG[19]);
+
         }
     }
 
@@ -43,7 +41,7 @@ public class SelectCourse extends Command {
         curOnlineUserCheck();
         permissionCheck(State.getCurOnlineUser(), ERR_MSG[13], User.Identity.STUDENT);
         strCheck(args[0], ERR_MSG[24], ARG_FORMAT[9]); // 课程编号
-        courseExistCheck(args[0]); // 课程存在性
+        courseExistCheck(args[0], 0); // 课程存在性
         courseTimeConflictCheck(args[0]); // 课程时间冲突性
         courseStudentLimitCheck(args[0]); // 课程学生数限制性
     }
