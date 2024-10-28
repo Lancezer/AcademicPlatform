@@ -7,12 +7,12 @@ import java.util.Scanner;
 public class Test {
     public static void main(String[] args) {
         // reopen
-        try {
-            FileInputStream file = new FileInputStream("./input/04.in");
-            System.setIn(file);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//            FileInputStream file = new FileInputStream("./input/04.in");
+//            System.setIn(file);
+//        } catch (FileNotFoundException e) {
+//            throw new RuntimeException(e);
+//        }
 
         Scanner input = new Scanner(System.in);
         // line index

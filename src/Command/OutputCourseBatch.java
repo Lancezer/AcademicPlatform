@@ -33,7 +33,7 @@ public class OutputCourseBatch extends Command {
                 PrintStream printStream = new java.io.PrintStream(file);
         ) {
             ((Teacher) State.getCurOnlineUser()).printTeacherCourseList(printStream, false, false);
-        } catch (Exception _) {
+        } catch (Exception e) {
         } finally {
             System.out.println(SUCCESS_MEG[14]);
         }

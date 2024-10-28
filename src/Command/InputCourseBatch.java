@@ -62,10 +62,9 @@ public class InputCourseBatch extends Command {
                 }
             }
             input02.close();
-        } catch (Exception _) {
+        } catch (Exception e) {
         } finally {
             System.out.println(SUCCESS_MEG[15]);
-            System.setIn(System.in);
         }
     }
 }

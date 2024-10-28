@@ -41,7 +41,7 @@ public class RemoveStudent extends Command {
         argsNumCheck(args.length);
         curOnlineUserCheck();
         permissionCheck(State.getCurOnlineUser(), ERR_MSG[13], User.Identity.TEACHER, User.Identity.ADMIN);
-        strCheck(args[0], ERR_MSG[3], ARG_FORMAT[0], ARG_FORMAT[1], ARG_FORMAT[2]);
+        strCheck(args[0], ERR_MSG[3], ARG_FORMAT[0], ARG_FORMAT[1], ARG_FORMAT[2], ARG_FORMAT[3], ARG_FORMAT[4]);
         userExistCheck(args[0]);
         studentIdentityCheck(args[0]);
         if (args.length == 2) {

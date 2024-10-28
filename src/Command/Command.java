@@ -90,7 +90,8 @@ public abstract class Command {
         if (user.getIdentity() == User.Identity.TEACHER) {
             Teacher teacher = (Teacher) user;
             Course course = Database.searchCourse(id);
-            if (teacher.searchCourse(course.getName()) == null) {
+            Course course1 = teacher.searchCourse(course.getName());
+            if (course1 == null || course1.getID() != course.getID()) {
                 throw new IllegalArgumentException(ERR_MSG[22]);
             }
         }
@@ -202,7 +203,7 @@ public abstract class Command {
             "Cancel course success (courseId: ", // Cancel course success (courseId: C-X) // 10
             ")", // 11 // Create course success (courseId: C-X), Select course success (courseId: C-X), Cancel course success (courseId: C-X)
             "List course success", // 12
-            "switch to ", // 13 // switch to 学工号
+            "Switch to ", // 13 // switch to 学工号
             "Output course batch success", // 14
             "Input course batch success", // 15
             "List student success", // 16
