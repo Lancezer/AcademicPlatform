@@ -1,9 +1,11 @@
 package Command;
 
+import Course.*;
 import System.*;
 import User.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public abstract class Command {
     protected String[] args;
@@ -38,10 +40,13 @@ public abstract class Command {
         }
     }
 
-    public void permissionCheck(User user, User.Identity identity, String errMessage) {
-        if (user.getIdentity() != identity) {
-            throw new IllegalArgumentException(errMessage);
+    public void permissionCheck(User user, String errMessage, User.Identity... identity) {
+        for (User.Identity i : identity) {
+            if (user.getIdentity() == i) {
+                return;
+            }
         }
+        throw new IllegalArgumentException(errMessage);
     }
 
     public void userExistCheck(String id) throws IllegalArgumentException {
@@ -56,12 +61,77 @@ public abstract class Command {
         }
     }
 
+    public void studentIdentityCheck(String id) throws IllegalArgumentException {
+        User user = Database.searchUser(id);
+        if (user.getIdentity() != User.Identity.STUDENT) {
+            throw new IllegalArgumentException(ERR_MSG[30]);
+        }
+    }
+
+    public void studentCourseNumCheck(String id) throws IllegalArgumentException {
+        Student student = (Student) Database.searchUser(id);
+        if (student.getCourseNum() == 0) {
+            throw new IllegalArgumentException(ERR_MSG[31]);
+        }
+    }
+
+    public void courseNumCheck() throws IllegalArgumentException {
+        Teacher teacher = (Teacher) State.getCurOnlineUser();
+        if (teacher.getCourseNum() >= teacher.getCourseLimit()) {
+            throw new IllegalArgumentException(ERR_MSG[15]);
+        }
+    }
+
+    public void courseExistCheck(String id) throws IllegalArgumentException {
+        if (Database.searchCourse(id) == null) {
+            throw new IllegalArgumentException(ERR_MSG[22]);
+        }
+        User user = State.getCurOnlineUser();
+        if (user.getIdentity() == User.Identity.TEACHER) {
+            Teacher teacher = (Teacher) user;
+            Course course = Database.searchCourse(id);
+            if (teacher.searchCourse(course.getName()) == null) {
+                throw new IllegalArgumentException(ERR_MSG[22]);
+            }
+        }
+    }
+
+    public void courseNameExistCheck(int mode) throws IllegalArgumentException {
+        Teacher teacher = (Teacher) State.getCurOnlineUser();
+        if (teacher.searchCourse(args[0]) != null) {
+            if (mode == 0) {
+                throw new IllegalArgumentException(ERR_MSG[17]);
+            } else if (mode == 1) {
+                throw new IllegalArgumentException(ERR_MSG[28]);
+            }
+        }
+    }
+
+    public void courseConflictCheck(CourseTime courseTime) throws IllegalArgumentException {
+        Teacher teacher = (Teacher) State.getCurOnlineUser();
+        ArrayList<Course> courseList = teacher.getCourseList();
+        for (Course course : courseList) {
+            if (course.getTime().isConflict(courseTime)) {
+                throw new IllegalArgumentException(ERR_MSG[19]);
+            }
+        }
+    }
+
+    public String directoryTransform(String str) {
+        if (str.startsWith("./")) {
+            return directoryHead + str.substring(2);
+        }
+        return directoryHead + str;
+    }
+
     public static final String[] SYSTEM_COMMANDS = {
             "quit",
             "register", "login", "logout", "switch",
             "printInfo",
             "createCourse", "listCourse", "selectCourse", "cancelCourse",
             "outputCourseBatch", "inputCourseBatch",
+            "listStudent", "removeStudent",
+            "listCourseSchedule",
     };
 
     public static final String[] ARG_FORMAT = {
@@ -104,6 +174,12 @@ public abstract class Command {
             "User id does not belong to a Teacher", // 23
             "Illegal course id", // 24
             "Course capacity is full", // 25
+            "File does not exist", // 26
+            "File is a directory", // 27
+            "Course name already exists", // 28
+            "Student does not select course", // 29
+            "User id does not belong to a Student", // 30
+            "Student does not select course", // 31
     };
 
     public static final String[] SUCCESS_MEG = {
@@ -128,5 +204,11 @@ public abstract class Command {
             "List course success", // 12
             "switch to ", // 13 // switch to 学工号
             "Output course batch success", // 14
+            "Input course batch success", // 15
+            "List student success", // 16
+            "Remove student success", // 17
+            "List course schedule success", // 18
     };
+
+    public static final String directoryHead = "./data/";
 }

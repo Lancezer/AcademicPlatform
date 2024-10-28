@@ -30,16 +30,16 @@ public class Login extends Command {
     }
 
     public void checkCommand() {
-        argsNumCheck(args.length - 1);
-        strCheck(args[1], ERR_MSG[3], ARG_FORMAT[0], ARG_FORMAT[1], ARG_FORMAT[2], ARG_FORMAT[3], ARG_FORMAT[4]); // 学工号
-        userExistCheck(args[1]); // 用户存在性
-        userOnlineCheck(args[1]); // 用户在线性
-        passwordCheck(args[1], args[2]); // 密码正确性
+        argsNumCheck(args.length);
+        strCheck(args[0], ERR_MSG[3], ARG_FORMAT[0], ARG_FORMAT[1], ARG_FORMAT[2], ARG_FORMAT[3], ARG_FORMAT[4]); // 学工号
+        userExistCheck(args[0]); // 用户存在性
+        userOnlineCheck(args[0]); // 用户在线性
+        passwordCheck(args[0], args[1]); // 密码正确性
     }
 
     public void execute() {
-        State.addOnlineUser(Database.searchUser(args[1]));
-        State.setCurOnlineUser(Database.searchUser(args[1]));
-        System.out.println(SUCCESS_MEG[3] + args[1]);
+        State.addOnlineUser(Database.searchUser(args[0]));
+        State.setCurOnlineUser(Database.searchUser(args[0]));
+        System.out.println(SUCCESS_MEG[3] + args[0]);
     }
 }

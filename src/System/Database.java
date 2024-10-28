@@ -13,7 +13,7 @@ public class Database {
     }
 
     public static void addUser(User user) {
-        userMap.put(user.getId(), user);
+        userMap.put(user.getID(), user);
     }
 
     public static User searchUser(String id) {

@@ -57,7 +57,7 @@ createCourse ao 2_8-10 12.5 20
 createCourse ap 2_11-12 12.5 20
 createCourse aq 2_13-14 13.5 20
 login 23373475 asdf1234_
-listCourse
+listCourse 00001
 qiut
 quit asdfasfadsf fdfa
 qtui

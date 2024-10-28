@@ -51,27 +51,27 @@ public class Register extends Command {
     }
 
     public void identityCheck(String identity, String id) throws IllegalArgumentException {
-        User.Identity flag1 = identityMatchByStr(identity), flag2 = identityMatchById(id);
-        if (flag1 == User.Identity.NO_IDENTITY || flag1 != flag2) {
+        User.Identity flag1 = identityMatchByStr(identity);
+        if (flag1 == User.Identity.NO_IDENTITY) {
             throw new IllegalArgumentException(ERR_MSG[8]);
         }
     }
 
     public void checkCommand() throws IllegalArgumentException {
-        argsNumCheck(args.length - 1);
-        strCheck(args[1], ERR_MSG[3], ARG_FORMAT[0], ARG_FORMAT[1], ARG_FORMAT[2], ARG_FORMAT[3], ARG_FORMAT[4]); // 学工号
-        userExistCheck(args[1]); // 用户存在性
-        strCheck(args[2], ERR_MSG[5], ARG_FORMAT[5]); // 用户名
-        strCheck(args[3], ERR_MSG[6], ARG_FORMAT[6]); // 密码
-        passwordEqualCheck(args[3], args[4]); // 密码一致性
-        identityCheck(args[5], args[1]); // 身份判断
+        argsNumCheck(args.length);
+        strCheck(args[0], ERR_MSG[3], ARG_FORMAT[0], ARG_FORMAT[1], ARG_FORMAT[2], ARG_FORMAT[3], ARG_FORMAT[4]); // 学工号
+        userExistCheck(args[0]); // 用户存在性
+        strCheck(args[1], ERR_MSG[5], ARG_FORMAT[5]); // 用户名
+        strCheck(args[2], ERR_MSG[6], ARG_FORMAT[6]); // 密码
+        passwordEqualCheck(args[2], args[3]); // 密码一致性
+        identityCheck(args[4], args[0]); // 身份判断
     }
 
     public void execute() {
-        User user = switch (args[5]) {
-            case "Student" -> new Student(User.Identity.STUDENT, args[1], args[2], args[3]);
-            case "Teacher" -> new Teacher(User.Identity.TEACHER, args[1], args[2], args[3]);
-            case "Administrator" -> new Admin(User.Identity.ADMIN, args[1], args[2], args[3]);
+        User user = switch (args[4]) {
+            case "Student" -> new Student(User.Identity.STUDENT, args[0], args[1], args[2]);
+            case "Teacher" -> new Teacher(User.Identity.TEACHER, args[0], args[1], args[2]);
+            case "Administrator" -> new Admin(User.Identity.ADMIN, args[0], args[1], args[2]);
             default -> null;
         };
         Database.addUser(user);

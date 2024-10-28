@@ -1,20 +1,26 @@
 package Command;
 
+import java.util.Arrays;
+
 public class CommandFactory {
     public static Command createCommand(String[] str) {
+        String[] args = Arrays.copyOfRange(str, 1, str.length);
         return switch (str[0]) {
-            case "quit" -> new Quit(str);
-            case "register" -> new Register(str);
-            case "login" -> new Login(str);
-            case "logout" -> new Logout(str);
-            case "switch" -> new Switch(str);
-            case "printInfo" -> new PrintInfo(str);
-            case "createCourse" -> new CreateCourse(str);
-            case "listCourse" -> new ListCourse(str);
-            case "selectCourse" -> new SelectCourse(str);
-            case "cancelCourse" -> new CancelCourse(str);
-            case "inputCourseBatch" -> new InputCourseBatch(str);
-            case "outputCourseBatch" -> new OutputCourseBatch(str);
+            case "quit" -> new Quit(args);
+            case "register" -> new Register(args);
+            case "login" -> new Login(args);
+            case "logout" -> new Logout(args);
+            case "switch" -> new Switch(args);
+            case "printInfo" -> new PrintInfo(args);
+            case "createCourse" -> new CreateCourse(args);
+            case "listCourse" -> new ListCourse(args);
+            case "selectCourse" -> new SelectCourse(args);
+            case "cancelCourse" -> new CancelCourse(args);
+            case "inputCourseBatch" -> new InputCourseBatch(args);
+            case "outputCourseBatch" -> new OutputCourseBatch(args);
+            case "listStudent" -> new ListStudent(args);
+            case "removeStudent" -> new RemoveStudent(args);
+            case "listCourseSchedule" -> new ListCourseSchedule(args);
             default -> null;
         };
     }

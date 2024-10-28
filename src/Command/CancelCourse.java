@@ -41,15 +41,15 @@ public class CancelCourse extends Command {
     }
 
     public void checkCommand() {
-        argsNumCheck(args.length - 1);
+        argsNumCheck(args.length);
         curOnlineUserCheck();
-        strCheck(args[1], ERR_MSG[24], ARG_FORMAT[9]); // 课程编号
-        courseExistCheck(args[1]); // 课程存在
+        strCheck(args[0], ERR_MSG[24], ARG_FORMAT[9]); // 课程编号
+        courseExistCheck(args[0]); // 课程存在
     }
 
     public void execute() {
         User user = State.getCurOnlineUser();
-        Course course = Database.searchCourse(args[1]);
+        Course course = Database.searchCourse(args[0]);
         if (user.getIdentity() == User.Identity.STUDENT) {
             Student student = (Student) user;
             student.removeCourse(course);
@@ -61,14 +61,14 @@ public class CancelCourse extends Command {
             for (Student student : studentList) {
                 student.removeCourse(course);
             }
-            Database.removeCourse(args[1]);
+            Database.removeCourse(args[0]);
         } else if (user.getIdentity() == User.Identity.ADMIN) {
             ArrayList<Student> studentList = course.getStudentList();
             for (Student student : studentList) {
                 student.removeCourse(course);
             }
             course.getTeacher().removeCourse(course);
-            Database.removeCourse(args[1]);
+            Database.removeCourse(args[0]);
         }
         System.out.println(SUCCESS_MEG[10] + course.getIDString() + SUCCESS_MEG[11]);
     }

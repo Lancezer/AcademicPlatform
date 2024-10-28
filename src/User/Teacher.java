@@ -2,6 +2,7 @@ package User;
 
 import Course.*;
 
+import java.io.PrintStream;
 import java.util.*;
 
 public class Teacher extends User {
@@ -20,6 +21,10 @@ public class Teacher extends User {
 
     public int getCourseNum() {
         return courseList.size();
+    }
+
+    public int getCourseLimit() {
+        return 10;
     }
 
     public ArrayList<Course> getCourseList() {
@@ -41,7 +46,7 @@ public class Teacher extends User {
         return course;
     }
 
-    public void printTeacherCourseList(boolean isPrintName, boolean isPrintID) {
+    public void printTeacherCourseList(PrintStream printStream, boolean isPrintName, boolean isPrintID) {
         List<Course> sortedCourseList = this.getCourseList();
         sortedCourseList.sort(new Comparator<Course>() {
             @Override
@@ -51,12 +56,12 @@ public class Teacher extends User {
         });
         for (Course course : sortedCourseList) {
             if (isPrintName) {
-                System.out.print(this.getName() + " ");
+                printStream.print(this.getName() + " ");
             }
             if (isPrintID) {
-                System.out.print(course.getIDString() + " ");
+                printStream.print(course.getIDString() + " ");
             }
-            System.out.println(course.getName() + " " + course.getTime().toString()
+            printStream.println(course.getName() + " " + course.getTime().toString()
                     + " " + String.format("%.1f", course.getCredit()) + " " + course.getPeriod());
         }
     }

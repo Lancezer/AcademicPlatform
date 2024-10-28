@@ -18,28 +18,28 @@ public class Logout extends Command {
     }
 
     public void checkCommand() {
-        argsNumCheck(args.length - 1);
+        argsNumCheck(args.length);
         curOnlineUserCheck();
-        if (args.length == 2) { // one args
-            permissionCheck(State.getCurOnlineUser(), User.Identity.ADMIN, ERR_MSG[13]);
-            strCheck(args[1], ERR_MSG[3], ARG_FORMAT[0], ARG_FORMAT[1], ARG_FORMAT[2], ARG_FORMAT[3], ARG_FORMAT[4]); // 学工号
-            userExistCheck(args[1]); // 用户存在性
-            userOnlineCheck(args[1]); // 用户在线性
+        if (args.length == 1) { // one args
+            permissionCheck(State.getCurOnlineUser(), ERR_MSG[13], User.Identity.ADMIN);
+            strCheck(args[0], ERR_MSG[3], ARG_FORMAT[0], ARG_FORMAT[1], ARG_FORMAT[2], ARG_FORMAT[3], ARG_FORMAT[4]); // 学工号
+            userExistCheck(args[0]); // 用户存在性
+            userOnlineCheck(args[0]); // 用户在线性
         }
     }
 
     public void execute() {
-        if (args.length == 1) { // no args
+        if (args.length == 0) { // no args
             State.removeOnlineUserByUserType(State.getCurOnlineUser());
-            System.out.println(State.getCurOnlineUser().getId() + SUCCESS_MEG[0]);
+            System.out.println(State.getCurOnlineUser().getID() + SUCCESS_MEG[0]);
             State.setCurOnlineUser(null);
         } else { // one args
-            User tmp = Database.searchUser(args[1]);
+            User tmp = Database.searchUser(args[0]);
             State.removeOnlineUserByUserType(tmp);
             if (State.getCurOnlineUser().equals(tmp)) {
                 State.setCurOnlineUser(null);
             }
-            System.out.println(args[1] + SUCCESS_MEG[0]);
+            System.out.println(args[0] + SUCCESS_MEG[0]);
         }
     }
 }

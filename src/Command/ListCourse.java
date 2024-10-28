@@ -39,30 +39,30 @@ public class ListCourse extends Command {
     }
 
     public void checkCommand() {
-        argsNumCheck(args.length - 1); // 参数数量检查
+        argsNumCheck(args.length); // 参数数量检查
         curOnlineUserCheck(); // 在线检查
-        if (args.length == 1) {
+        if (args.length == 0) {
             courseNumCheck(); // 课程数量
-        } else if (args.length > 1) {
-            permissionCheck(State.getCurOnlineUser(), User.Identity.ADMIN, ERR_MSG[13]); // 权限检查
-            strCheck(args[1], ERR_MSG[3], ARG_FORMAT[0], ARG_FORMAT[1], ARG_FORMAT[2], ARG_FORMAT[3]); // 用户ID合法性
-            userExistCheck(args[1]); // 用户存在性
-            permissionCheck(Database.searchUser(args[1]), User.Identity.TEACHER, ERR_MSG[23]); // 查询身份
-            courseNumCheck(args[1]); // 课程数量
+        } else if (args.length > 0) {
+            permissionCheck(State.getCurOnlineUser(), ERR_MSG[13], User.Identity.ADMIN); // 权限检查
+            strCheck(args[0], ERR_MSG[3], ARG_FORMAT[0], ARG_FORMAT[1], ARG_FORMAT[2], ARG_FORMAT[3]); // 用户ID合法性
+            userExistCheck(args[0]); // 用户存在性
+            permissionCheck(Database.searchUser(args[0]), ERR_MSG[23], User.Identity.TEACHER); // 查询身份
+            courseNumCheck(args[0]); // 课程数量
         }
     }
 
     public void execute() {
-        if (args.length == 1) {
+        if (args.length == 0) {
             User user = State.getCurOnlineUser();
             if (user.getIdentity() == User.Identity.TEACHER) {
-                ((Teacher) user).printTeacherCourseList(false, true);
+                ((Teacher) user).printTeacherCourseList(System.out, false, true);
             } else {
                 Database.printCourseList();
             }
-        } else if (args.length > 1) {
-            User user = Database.searchUser(args[1]);
-            ((Teacher) user).printTeacherCourseList(true, true);
+        } else if (args.length > 0) {
+            User user = Database.searchUser(args[0]);
+            ((Teacher) user).printTeacherCourseList(System.out, true, true);
         }
         System.out.println(SUCCESS_MEG[12]);
     }

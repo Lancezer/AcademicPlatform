@@ -7,16 +7,16 @@ import java.util.Scanner;
 public class Test {
     public static void main(String[] args) {
         // reopen
-//        try {
-//            FileInputStream file = new FileInputStream("./input/test.in");
-//            System.setIn(file);
-//        } catch (FileNotFoundException e) {
-//            throw new RuntimeException(e);
-//        }
+        try {
+            FileInputStream file = new FileInputStream("./input/04.in");
+            System.setIn(file);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
 
         Scanner input = new Scanner(System.in);
         // line index
-        int cnt = 1;
+//        int cnt = 1;
         while (input.hasNextLine()) {
             String str_in = input.nextLine();
             if (str_in.isEmpty()) {

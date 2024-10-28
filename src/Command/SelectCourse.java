@@ -20,12 +20,6 @@ public class SelectCourse extends Command {
         }
     }
 
-    public void courseExistCheck(String id) throws IllegalArgumentException {
-        if (Database.searchCourse(id) == null) {
-            throw new IllegalArgumentException(ERR_MSG[22]);
-        }
-    }
-
     public void courseTimeConflictCheck(String id) throws IllegalArgumentException {
         Student student = (Student) State.getCurOnlineUser();
         ArrayList<Course> courseList = student.getCourseList();
@@ -45,18 +39,18 @@ public class SelectCourse extends Command {
     }
 
     public void checkCommand() {
-        argsNumCheck(args.length - 1);
+        argsNumCheck(args.length);
         curOnlineUserCheck();
-        permissionCheck(State.getCurOnlineUser(), User.Identity.STUDENT, ERR_MSG[13]);
-        strCheck(args[1], ERR_MSG[24], ARG_FORMAT[9]); // 课程编号
-        courseExistCheck(args[1]); // 课程存在性
-        courseTimeConflictCheck(args[1]); // 课程时间冲突性
-        courseStudentLimitCheck(args[1]); // 课程学生数限制性
+        permissionCheck(State.getCurOnlineUser(), ERR_MSG[13], User.Identity.STUDENT);
+        strCheck(args[0], ERR_MSG[24], ARG_FORMAT[9]); // 课程编号
+        courseExistCheck(args[0]); // 课程存在性
+        courseTimeConflictCheck(args[0]); // 课程时间冲突性
+        courseStudentLimitCheck(args[0]); // 课程学生数限制性
     }
 
     public void execute() {
         Student student = (Student) State.getCurOnlineUser();
-        Course course = Database.searchCourse(args[1]);
+        Course course = Database.searchCourse(args[0]);
         student.addCourse(course);
         course.addStudent(student);
         System.out.println(SUCCESS_MEG[9] + course.getIDString() + SUCCESS_MEG[11]);

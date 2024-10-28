@@ -37,7 +37,7 @@ public class State {
 
     public static boolean isOnline(String id) {
         for (User user : onlineUserList) {
-            if (user.getId().equals(id)) {
+            if (user.getID().equals(id)) {
                 return true;
             }
         }

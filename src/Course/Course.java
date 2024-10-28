@@ -1,6 +1,7 @@
 package Course;
 
 import User.*;
+import System.*;
 
 import java.util.ArrayList;
 
@@ -63,6 +64,13 @@ public class Course {
         return this.teacher;
     }
 
+    public int compareTo(Course course) {
+        if (this.time.getDay() != course.getTime().getDay()) {
+            return this.time.getDay() - course.getTime().getDay();
+        }
+        return this.time.getStart() - course.getTime().getStart();
+    }
+
     public int getStudentNumLimit() {
         return 30;
     }
@@ -79,7 +87,20 @@ public class Course {
         studentList.add(student);
     }
 
+    public Student searchStudent(String id) {
+        Student student = (Student) Database.searchUser(id);
+        return studentList.contains(student) ? student : null;
+    }
+
     public void removeStudent(Student student) {
         studentList.remove(student);
+    }
+
+    public void printStudentList() {
+        ArrayList<Student> sortedStudentList = new ArrayList<>(studentList);
+        sortedStudentList.sort((o1, o2) -> o1.compareTo(o2));
+        for (Student student : sortedStudentList) {
+            System.out.println(student.getID() + ": " + student.getName());
+        }
     }
 }

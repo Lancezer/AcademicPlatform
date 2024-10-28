@@ -18,13 +18,13 @@ public class Quit extends Command {
     }
 
     public void checkCommand() throws IllegalArgumentException {
-        argsNumCheck(args.length - 1);
+        argsNumCheck(args.length);
     }
 
     public void execute() {
         while (!State.isOnlineListEmpty()) {
             User tmp = State.removeOnlineUserByIndex(0);
-            System.out.println(tmp.getId() + SUCCESS_MEG[0]);
+            System.out.println(tmp.getID() + SUCCESS_MEG[0]);
         }
         System.out.println(SUCCESS_MEG[1]);
     }

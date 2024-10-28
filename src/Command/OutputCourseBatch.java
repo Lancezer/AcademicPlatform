@@ -3,8 +3,7 @@ package Command;
 import System.State;
 import User.*;
 
-import java.io.FileOutputStream;
-import java.io.PrintStream;
+import java.io.*;
 
 public class OutputCourseBatch extends Command {
     public OutputCourseBatch(String[] args) {
@@ -18,28 +17,24 @@ public class OutputCourseBatch extends Command {
     }
 
     public void checkCommand() {
-        argsNumCheck(args.length - 1);
+        argsNumCheck(args.length);
         curOnlineUserCheck();
-        permissionCheck(State.getCurOnlineUser(), User.Identity.TEACHER, ERR_MSG[13]);
-    }
-
-    public String directoryDeal(String str) {
-        if (str.startsWith("./")) {
-            return str.substring(2);
-        }
-        return str;
+        permissionCheck(State.getCurOnlineUser(), ERR_MSG[13], User.Identity.TEACHER);
     }
 
     public void execute() {
-        final String directoryHead = "./data/";
-        String directoryOutput = directoryHead + directoryDeal(args[1]);
-        try (FileOutputStream file = new FileOutputStream(directoryOutput);
-             PrintStream printStream = new java.io.PrintStream(file)) {
-            System.setOut(printStream);
-            ((Teacher) State.getCurOnlineUser()).printTeacherCourseList(false, false);
+        File directory = new File(directoryHead);
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
+        String directoryOutput = directoryTransform(args[0]);
+        try (
+                FileOutputStream file = new FileOutputStream(directoryOutput);
+                PrintStream printStream = new java.io.PrintStream(file);
+        ) {
+            ((Teacher) State.getCurOnlineUser()).printTeacherCourseList(printStream, false, false);
         } catch (Exception _) {
         } finally {
-            System.setOut(System.out);
             System.out.println(SUCCESS_MEG[14]);
         }
     }
