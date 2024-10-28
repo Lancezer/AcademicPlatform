@@ -79,10 +79,6 @@ public class Course {
         return studentList.size();
     }
 
-    public ArrayList<Student> getStudentList() {
-        return studentList;
-    }
-
     public void addStudent(Student student) {
         studentList.add(student);
     }
@@ -94,6 +90,15 @@ public class Course {
 
     public void removeStudent(Student student) {
         studentList.remove(student);
+    }
+
+    public void removeCourse() {
+        for (Student student : studentList) {
+            student.removeCourse(this);
+        }
+        studentList.clear();
+        this.teacher.removeCourse(this);
+        Database.removeCourse(this.getIDString());
     }
 
     public void printStudentList() {

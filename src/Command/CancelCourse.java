@@ -34,21 +34,8 @@ public class CancelCourse extends Command {
             Student student = (Student) user;
             student.removeCourse(course);
             course.removeStudent(student);
-        } else if (user.getIdentity() == User.Identity.TEACHER) {
-            Teacher teacher = (Teacher) user;
-            teacher.removeCourse(course);
-            ArrayList<Student> studentList = course.getStudentList();
-            for (Student student : studentList) {
-                student.removeCourse(course);
-            }
-            Database.removeCourse(args[0]);
-        } else if (user.getIdentity() == User.Identity.ADMIN) {
-            ArrayList<Student> studentList = course.getStudentList();
-            for (Student student : studentList) {
-                student.removeCourse(course);
-            }
-            course.getTeacher().removeCourse(course);
-            Database.removeCourse(args[0]);
+        } else {
+            course.removeCourse();
         }
         System.out.println(SUCCESS_MEG[10] + course.getIDString() + SUCCESS_MEG[11]);
     }
